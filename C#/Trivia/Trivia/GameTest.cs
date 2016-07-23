@@ -15,27 +15,27 @@ namespace Trivia
 		public void Game_not_playable_for_fewer_than_two_players()
 		{
 			var game = new Game();
-			Assert.That(game.isPlayable(), Is.False);
-			game.add("Keith");
-			Assert.That(game.isPlayable(), Is.False);
-			game.add("martin");
-			Assert.That(game.isPlayable(), Is.True);
-			game.add("Mark");
-			Assert.That(game.isPlayable(), Is.True);
+			Assert.That(game.CanStartGame(), Is.False);
+			game.AddPlayer("Keith");
+			Assert.That(game.CanStartGame(), Is.False);
+			game.AddPlayer("martin");
+			Assert.That(game.CanStartGame(), Is.True);
+			game.AddPlayer("Mark");
+			Assert.That(game.CanStartGame(), Is.True);
 		}
 
 		[Test]
 		public void Game_can_be_won()
 		{
 			var game = new Game();
-			game.add("Keith");
-			game.add("martin");
-			game.add("Mark");
+			game.AddPlayer("Keith");
+			game.AddPlayer("martin");
+			game.AddPlayer("Mark");
 
 			var hasbeenwon = false;
 
-			game.roll(5);
-			hasbeenwon = game.wasCorrectlyAnswered();
+			game.Play(5);
+			hasbeenwon = game.UpdatePlayerStateOnCorrectAnswer();
 
 			Assert.That(hasbeenwon, Is.True);
 		}

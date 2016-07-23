@@ -16,9 +16,9 @@ namespace Trivia
 		{
 			Game aGame = new Game();
 
-			aGame.add("Chet");
-			aGame.add("Pat");
-			aGame.add("Sue");
+			aGame.AddPlayer("Chet");
+			aGame.AddPlayer("Pat");
+			aGame.AddPlayer("Sue");
 
 			var rand = new Random();
 			if (args.Length > 0)
@@ -27,15 +27,15 @@ namespace Trivia
 			do
 			{
 
-				aGame.roll(rand.Next(5) + 1);
+				aGame.Play(rand.Next(5) + 1);
 
 				if (rand.Next(9) == 7)
 				{
-					notAWinner = aGame.wrongAnswer();
+					notAWinner = aGame.UpdatePlayerStateOnWrongAnswer();
 				}
 				else
 				{
-					notAWinner = aGame.wasCorrectlyAnswered();
+					notAWinner = aGame.UpdatePlayerStateOnCorrectAnswer();
 				}
 			} while (notAWinner);
 
